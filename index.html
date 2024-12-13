@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website Links</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        header {
+            width: 100%;
+            padding: 15px 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.85);
+            border-bottom: 3px solid #4caf50;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #4caf50;
+            letter-spacing: 2px;
+        }
+
+        .toggle-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            background: #4caf50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+            width: 280px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        .form-container .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 0.9rem;
+            border: 2px solid #4caf50;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+
+        .form-group input[type="file"] {
+            padding: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            /* width: 100%; */
+            padding: 10px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(135deg, #4caf50, #81c784);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .links {
+            margin-top: 80px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        .link-item {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+            color: white;
+            transition: transform 0.3s ease;
+            position: relative;
+            min-height: 150px;
+        }
+
+        .link-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .link-item h3 {
+            margin-bottom: 10px;
+            color: #81c784;
+            display: flex;
+            align-items: center;
+        }
+
+        .link-item h3 img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .link-item p {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+        .link-item a {
+            color: #4caf50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link-item a:hover {
+            color: #81c784;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .action-buttons button {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .delete-button {
+            color: #f44336;
+        }
+
+        .edit-button {
+            color: #ff9800;
+        }
+
+        .show-more {
+            color: #4caf50;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 600px) {
+            header h1 {
+                font-size: 1rem;
+                color: #fff;
+            }
+
+            header {
+                justify-content: space-between;
+            }
+
+            .toggle-button {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+
+            .form-container {
+                width: 70%;
+                top: 15px;
+                right: 10px;
+            }
+
+            .links {
+                margin-top: 60px;
+                display: grid;
+                grid-template-columns: 1fr;
+                /* One column layout for smaller screens */
+                gap: 10px;
+            }
+
+            .link-item {
+                padding: 12px;
+                min-height: 130px;
+            }
+
+            .action-buttons button {
+                font-size: 1rem;
+            }
+
+            .show-more {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            header h1 {
+                font-size: 0.6rem;
+            }
+
+            .toggle-button {
+                padding: 8px 14px;
+                font-size: 0.7rem;
+            }
+
+            .form-container {
+                width: 60%;
+                top: 10px;
+                right: 5px;
+            }
+
+            .link-item h3 img {
+                width: 25px;
+                height: 25px;
+            }
+
+            .link-item p {
+                font-size: 0.85rem;
+            }
+
+            .action-buttons button {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>My Website Links Manager</h1>
+        <button class="toggle-button" onclick="toggleForm()">Add Link</button>
+    </header>
+
+    <div class="form-container" id="formContainer">
+        <span class="close-btn" onclick="closeForm()">X</span>
+        <div class="form-group">
+            <label for="title">Website Title:</label>
+            <input type="text" id="title" placeholder="Enter website title">
+        </div>
+        <div class="form-group">
+            <label for="link">Website Link:</label>
+            <input type="url" id="link" placeholder="Enter website URL">
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" placeholder="Enter description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="logo">Logo (Image):</label>
+            <input type="file" id="logo" accept="image/*">
+        </div>
+        <button onclick="addLink()">Save Link</button>
+    </div>
+
+    <div class="links" id="links"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', displayLinks);
+
+        function toggleForm() {
+            const formContainer = document.getElementById('formContainer');
+            formContainer.classList.toggle('active');
+        }
+
+        function closeForm() {
+            const formContainer = document.getElementById('formContainer');
+            formContainer.classList.remove('active');
+        }
+
+        function addLink() {
+            const title = document.getElementById('title').value;
+            const link = document.getElementById('link').value;
+            const description = document.getElementById('description').value;
+            const logo = document.getElementById('logo').files[0];
+
+            if (!title || !link || !description) {
+                alert('Please fill all fields!');
+                return;
+            }
+
+            const logoUrl = logo ? URL.createObjectURL(logo) : "https://via.placeholder.com/30";
+
+            const links = JSON.parse(localStorage.getItem('links')) || [];
+            links.push({ title, link, description, logoUrl });
+            localStorage.setItem('links', JSON.stringify(links));
+
+            displayLinks();
+
+            document.getElementById('title').value = '';
+            document.getElementById('link').value = '';
+            document.getElementById('description').value = '';
+            document.getElementById('logo').value = '';
+        }
+
+        function displayLinks() {
+            const links = JSON.parse(localStorage.getItem('links')) || [];
+            const linksContainer = document.getElementById('links');
+            linksContainer.innerHTML = '';
+
+            links.forEach((link, index) => {
+                const linkElement = document.createElement('div');
+                linkElement.className = 'link-item';
+                linkElement.innerHTML = `
+                    <h3><img src="${link.logoUrl}" alt="logo"> ${link.title}</h3>
+                    <p>${link.description}</p>
+                    <span class="show-more" onclick="toggleDescription(${index})">Show more</span>
+                    <a href="${link.link}" target="_blank">Visit</a>
+                    <div class="action-buttons">
+                        <button class="edit-button" onclick="editLink(${index})"><i class="fas fa-edit"></i></button>
+                        <button class="delete-button" onclick="confirmDelete(${index})"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                `;
+                linksContainer.appendChild(linkElement);
+            });
+        }
+
+        function toggleDescription(index) {
+            const links = JSON.parse(localStorage.getItem('links')) || [];
+            const link = links[index];
+            const linkItem = document.querySelectorAll('.link-item')[index];
+            const descriptionElement = linkItem.querySelector('p');
+
+            if (descriptionElement.style.webkitLineClamp === 'none') {
+                descriptionElement.style.webkitLineClamp = 3;
+                descriptionElement.style.overflow = 'hidden';
+            } else {
+                descriptionElement.style.webkitLineClamp = 'none';
+                descriptionElement.style.overflow = 'visible';
+            }
+        }
+
+        function editLink(index) {
+            const links = JSON.parse(localStorage.getItem('links')) || [];
+            const link = links[index];
+            document.getElementById('title').value = link.title;
+            document.getElementById('link').value = link.link;
+            document.getElementById('description').value = link.description;
+            // Set the file input field for the logo if needed
+            toggleForm();
+        }
+
+        function confirmDelete(index) {
+            if (confirm('Are you sure you want to delete this link?')) {
+                deleteLink(index);
+            }
+        }
+
+        function deleteLink(index) {
+            const links = JSON.parse(localStorage.getItem('links')) || [];
+            links.splice(index, 1);
+            localStorage.setItem('links', JSON.stringify(links));
+            displayLinks();
+        }
+    </script>
+</body>
+
+</html>
